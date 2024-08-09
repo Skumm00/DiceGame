@@ -1,6 +1,7 @@
 #imports the random numbers
 import random
 
+#superdice function
 def superdice(num_dice):
     """
     More Advanced features for the dice!
@@ -37,19 +38,6 @@ def superdice(num_dice):
             print("[\u00a0  0 ]")
             print("[0 0]")
             print("[-----]", end=" ")
-        elif d == 6:
-            print("[-----]")
-            print("[0 0]")
-            print("[\u00a0  0 ]")
-            print("[0 0]")
-            print("[-----]", end=" ")
-        elif d == 7:
-            print("[-----]")
-            print("[0 0]")
-            print("[\u00a0  0 ]")
-            print("[0 0]")
-            print("[-----]", end=" ")
-            
         else:
             print("[-----]")
             print("[0 0 0]")
@@ -57,12 +45,31 @@ def superdice(num_dice):
             print("[0 0 0]")
             print("[-----]", end=" ")
 
-    total = 1  #Total should be 1!
+    total = 1  # Total should be 1!
     for _ in range(num_dice):
-            b = random.randint(1, 6)
-            total += b  
+        b = random.randint(1, 6)
+        total += b
 
     print(f"Complete sum of {num_dice} dice rolls is {total}!")
+
+
+    # Gets the avg value of each roll
+    average = total / num_dice
+    print(f"Average value per roll: {average:.2f}")
+
+    # = Show the highest/lowest roll
+    highest_roll = max(b for _ in range(num_dice))
+    lowest_roll = min(b for _ in range(num_dice))
+    print(f"Highest roll: {highest_roll}")
+    print(f"Lowest roll: {lowest_roll}")
+
+    #Puts a cool message
+    if total == num_dice:
+        print("Wow, you rolled all ones! Lucky!")
+    elif total == 7 * num_dice:
+        print("Lucky number 7!")
+
+#rolldice function
 def rolldice(num_dice):
     """
     Rolls for how many rolls you want
@@ -113,6 +120,7 @@ def rolldice(num_dice):
             total_sum += b  
 
     print(f"Complete sum of {num_dice} dice rolls is {total_sum}!")
+    
 def main():
     #while true display
     while True:
@@ -125,8 +133,11 @@ def main():
                 rolldice(num_dice)
                 print()  # After Displaying Results
             elif selecter == "s":
-                num_dice = int(input("Enter how maby duce u want"))
-            
+                super_dice = int(input("Enter how many dice you need: "))
+                if super_dice == 0:
+                    break
+                superdice(super_dice)
+                print()#prints everything
         except ValueError:
             print("NOT VALID! ENTER A POSTIVE NUMBER OR CLICK 0 TO LEAVE!")
 
